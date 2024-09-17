@@ -1,4 +1,7 @@
-﻿using LivrosApi.Data.Dtos.Admin;
+﻿using AutoMapper;
+using LivrosApi.Data.Dtos.Admin;
+using LivrosApi.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LivrosApi.Controllers;
@@ -7,9 +10,26 @@ namespace LivrosApi.Controllers;
 [Route("[Controller]")]
 public class AdminController: ControllerBase
 {
-	[HttpPost]
-	public IActionResult CadastraAdmin(CreateAdminDto CreateAdminDto)
+	private IMapper _mapper;
+	private UserManager<Admin> _userManager;
+
+	public AdminController(IMapper mapper, UserManager<Admin> userManager)
 	{
-		throw new NotImplementedException();
+		_mapper = mapper;
+		_userManager = userManager;
+	}
+
+	[HttpPost("cadastro")]
+	public async Task<IActionResult>
+		CadastraAdmin(CreateAdminDto CreateAdminDto)
+	{
+		Admin admin = _mapper.Map<Admin>(CreateAdminDto);
+		admin.DataNascimento = CreateAdminDto.DataNascimento.ToUniversalTime();
+		IdentityResult resultado = await _userManager.CreateAsync(admin, CreateAdminDto.Password);
+
+		if (resultado.Succeeded)
+			return Ok("Administrador cadastrado!");
+
+		throw new ApplicationException("Falha ao cadastrar administrador!");
 	}
 }

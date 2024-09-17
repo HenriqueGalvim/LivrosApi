@@ -1,6 +1,12 @@
 @LivrosApi_HostAddress = http://localhost:5006
 
-GET {{LivrosApi_HostAddress}}/weatherforecast/
-Accept: application/json
-
+POST {{LivrosApi_HostAddress}}/admin/cadastro
+Content-type: application/json
+{
+  "Username": "Henrique",
+  "DataNascimento": "2003-10-30",
+  "Cpf": "99877755521",
+  "Password": "Admin1234!",
+  "RePassword": "Admin1234!"
+}
 ###

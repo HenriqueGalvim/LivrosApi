@@ -2,9 +2,9 @@
 
 namespace LivrosApi.Models;
 
-public class Admin : IdentityUser
+public class Usuario : IdentityUser
 {
 	public DateTime DataNascimento{ get; set; }
 	public string Cpf { get; set; }
-	public Admin() : base() { }
+	public Usuario() : base() { }
 }

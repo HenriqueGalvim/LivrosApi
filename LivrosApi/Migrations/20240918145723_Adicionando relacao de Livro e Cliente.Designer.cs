@@ -3,6 +3,7 @@ using System;
 using LivrosApi.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace LivrosApi.Migrations
 {
     [DbContext(typeof(UsuarioDbContext))]
-    partial class AdminDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240918145723_Adicionando relacao de Livro e Cliente")]
+    partial class AdicionandorelacaodeLivroeCliente
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,14 +33,6 @@ namespace LivrosApi.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Cpf")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.HasKey("Id");
 
                     b.ToTable("Clientes");
@@ -51,26 +46,14 @@ namespace LivrosApi.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Autor")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int?>("ClientId")
+                        .HasColumnType("integer");
 
                     b.Property<int?>("ClienteId")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("DataPublicacao")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<bool>("Emprestado")
                         .HasColumnType("boolean");
-
-                    b.Property<string>("ISBN")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Titulo")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -284,11 +267,9 @@ namespace LivrosApi.Migrations
 
             modelBuilder.Entity("LivrosApi.Models.Livro", b =>
                 {
-                    b.HasOne("LivrosApi.Models.Cliente", "Cliente")
+                    b.HasOne("LivrosApi.Models.Cliente", null)
                         .WithMany("LivrosEmprestados")
                         .HasForeignKey("ClienteId");
-
-                    b.Navigation("Cliente");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -4,10 +4,10 @@ using LivrosApi.Models;
 
 namespace LivrosApi.Profiles;
 
-public class AdminProfile : Profile
+public class UsuarioProfile : Profile
 {
-    public AdminProfile()
+    public UsuarioProfile()
     {
-		CreateMap<CreateAdminDto, Admin>();
+		CreateMap<CreateUsuarioDto, Usuario>();
 	}
 }

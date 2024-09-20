@@ -11,8 +11,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace LivrosApi.Migrations
 {
-    [DbContext(typeof(AdminDbContext))]
-    [Migration("20240917151923_Criando Admin")]
+    [DbContext(typeof(UsuarioDbContext))]
+    [Migration("20240917151923_Criando Usuario")]
     partial class CriandoAdmin
     {
         /// <inheritdoc />
@@ -25,7 +25,7 @@ namespace LivrosApi.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("LivrosApi.Models.Admin", b =>
+            modelBuilder.Entity("LivrosApi.Models.Usuario", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text");
@@ -235,7 +235,7 @@ namespace LivrosApi.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("LivrosApi.Models.Admin", null)
+                    b.HasOne("LivrosApi.Models.Usuario", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -244,7 +244,7 @@ namespace LivrosApi.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("LivrosApi.Models.Admin", null)
+                    b.HasOne("LivrosApi.Models.Usuario", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -259,7 +259,7 @@ namespace LivrosApi.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("LivrosApi.Models.Admin", null)
+                    b.HasOne("LivrosApi.Models.Usuario", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -268,7 +268,7 @@ namespace LivrosApi.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("LivrosApi.Models.Admin", null)
+                    b.HasOne("LivrosApi.Models.Usuario", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

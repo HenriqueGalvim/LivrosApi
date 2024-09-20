@@ -2,7 +2,7 @@
 
 namespace LivrosApi.Data.Dtos.Admin;
 
-public class CreateAdminDto
+public class CreateUsuarioDto
 {
     [Required]
     public string Username { get; set; }

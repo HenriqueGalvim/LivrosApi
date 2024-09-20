@@ -1,6 +1,7 @@
 @LivrosApi_HostAddress = http://localhost:5006
+@token = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkhlbnJpcXVlIiwiaWQiOiIzYTMxYTFmMi00N2NkLTQ5MmQtYTUwZS0zNzFhMjg0MTExMjUiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9kYXRlb2ZiaXJ0aCI6IjMwLzEwLzIwMDMgMDQ6MDA6MDAiLCJleHAiOjE3MjY4NDU3NDB9.zgPQgNwLgw3SuMYPGrFAnvvsTbDektP70I5t3CsiFkA
 
-POST {{LivrosApi_HostAddress}}/admin/cadastro
+POST {{LivrosApi_HostAddress}}/usuario/cadastro
 Content-type: application/json
 {
   "Username": "Henrique",
@@ -8,5 +9,73 @@ Content-type: application/json
   "Cpf": "99877755521",
   "Password": "Admin1234!",
   "RePassword": "Admin1234!"
+}
+###
+POST {{LivrosApi_HostAddress}}/usuario/login
+Content-type: application/json
+{
+  "Username": "Henrique",
+  "Password": "Admin1234!"
+}
+
+###
+POST {{LivrosApi_HostAddress}}/livro
+Content-Type: application/json
+Authorization: {{token}}
+{
+ "Titulo": "Piratas do Caribe",
+ "Autor": "J. R. R. Tolkien",
+ "ISBN": "978-0-618-05326-7",
+ "DataPublicacao": "1954-07-29",
+ "Emprestado": false
+}
+###
+GET {{LivrosApi_HostAddress}}/livro
+Content-Type: application/json
+
+###
+GET {{LivrosApi_HostAddress}}/livro/1
+Content-Type: application/json
+
+###
+DELETE {{LivrosApi_HostAddress}}/livro/3
+Content-Type: application/json
+Authorization: {{token}}
+###
+
+POST {{LivrosApi_HostAddress}}/cliente/emprestar
+Content-Type: application/json
+Authorization: {{token}}
+{
+"IdLivro" : 1,
+"IdCliente": 2
+}
+###
+
+POST {{LivrosApi_HostAddress}}/cliente
+Content-Type: application/json
+Authorization: {{token}}
+{
+"Nome" : "Henrique",
+"Cpf": "06086351201"
+}
+###
+GET {{LivrosApi_HostAddress}}/cliente/
+Content-Type: application/json
+
+###
+POST {{LivrosApi_HostAddress}}/cliente/devolver
+Content-Type: application/json
+Authorization: {{token}}
+{
+"IdLivro" : 1
+}
+###
+PUT {{LivrosApi_HostAddress}}/cliente/2
+Content-Type: application/json
+Authorization: {{token}}
+{
+"Nome" : "Henrique dos Santos Galvim",
+"Cpf": "06086351201"
 }
 ###
